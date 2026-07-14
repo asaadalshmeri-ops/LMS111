@@ -10,7 +10,8 @@ export const SocketProvider = ({ children }) => {
 
   useEffect(() => {
     // Establish connection to backend server
-    const socketConnection = io('http://localhost:5000', {
+    const socketUrl = import.meta.env.VITE_SOCKET_URL || 'http://localhost:5000';
+    const socketConnection = io(socketUrl, {
       withCredentials: true,
       transports: ['websocket', 'polling']
     });

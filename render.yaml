@@ -10,7 +10,18 @@ services:
         headers:
           - key: Cache-Control
             value: public, max-age=31536000, immutable
+    envVars:
+      - key: VITE_SOCKET_URL
+        value: https://lms111.onrender.com
     routes:
+      # Rewrite API requests to the backend service
+      - type: rewrite
+        source: "/api/*"
+        destination: "https://lms-backend.onrender.com/api/*"
+      # Rewrite uploads to the backend service
+      - type: rewrite
+        source: "/uploads/*"
+        destination: "https://lms-backend.onrender.com/uploads/*"
       # Redirect all paths to index.html for React Router to work
       - type: rewrite
         source: "/*"
@@ -47,3 +58,5 @@ services:
         generateValue: true
       - key: APP_URL
         value: https://lms-backend.onrender.com
+      - key: SOCKET_BRIDGE_URL
+        value: https://lms111.onrender.com

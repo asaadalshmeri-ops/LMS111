@@ -22,7 +22,8 @@ class StudentController extends Controller
     {
         try {
             $client = new Client();
-            $client->post('http://localhost:5001/broadcast', [
+            $socketUrl = env('SOCKET_BRIDGE_URL', 'http://localhost:5001') . '/broadcast';
+            $client->post($socketUrl, [
                 'json' => [
                     'event' => $event,
                     'data' => $data
