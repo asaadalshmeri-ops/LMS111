@@ -7,6 +7,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.get('/', (req, res) => {
+  res.send('WebSockets Bridge is running successfully!');
+});
+
 const server = http.createServer(app);
 const io = socketIo(server, {
   cors: {
